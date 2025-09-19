@@ -13,7 +13,6 @@ public interface UserMapper {
     @Mapping(target = "password", expression = "java(passwordEncoderService.encodePassword(source.getPassword()))")
     User fromUserDTO(UserDTO source);
 
-    @Mapping(source = "owner.id", target = "ownerId")
     @Mapping(target = "password", ignore = true)
     UserDTO fromUser(User source);
 }
