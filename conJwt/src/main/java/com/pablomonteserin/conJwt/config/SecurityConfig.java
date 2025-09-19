@@ -57,7 +57,7 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .cors(withDefaults())
                 .authorizeHttpRequests((requests) -> {
-                    try {              requests.requestMatchers("/login").permitAll().anyRequest().authenticated();                                    ;
+                    try {              requests.requestMatchers("/login","/signin").permitAll().anyRequest().authenticated();                                    ;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }

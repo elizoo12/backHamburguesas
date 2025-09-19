@@ -9,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 public class Encoder {
     // Creamos un bean de la clase BCryptPasswordEncoder para tenerlo disponible en el contexto, y poder materializar el Autowired de la clase SecurityConfig
     @Bean(name = "passwordEncoder")
-    BCryptPasswordEncoder passwordencoder() {
+    static BCryptPasswordEncoder passwordencoder() {
         return new BCryptPasswordEncoder();
     }
 }
