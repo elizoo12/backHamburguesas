@@ -17,11 +17,12 @@ public class JwtUserDetailsService implements UserDetailsService {
 
     @Autowired
     UserRepository userRepository;
+
     @Autowired
     BCryptPasswordEncoder encoder;
+
     @Autowired
     UserMapper userMapper;
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -31,7 +32,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
         return user;
     }
-
 
     public User saveUser(User user) {
         String encryptedPassword = encoder.encode(user.getPassword());
