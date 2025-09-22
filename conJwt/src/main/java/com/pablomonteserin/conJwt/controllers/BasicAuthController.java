@@ -1,5 +1,6 @@
 package com.pablomonteserin.conJwt.controllers;
 
+import com.pablomonteserin.conJwt.config.Encoder;
 import com.pablomonteserin.conJwt.dto.UserDTO;
 import com.pablomonteserin.conJwt.mapper.UserMapper;
 import com.pablomonteserin.conJwt.model.User;
@@ -9,10 +10,8 @@ import com.pablomonteserin.conJwt.utils.JwtTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -25,6 +24,13 @@ public class BasicAuthController {
     UserMapper userMapper;
     @Autowired
     JwtUserDetailsService jwtUserDetailsService;
+
+    @Autowired
+    UserRepository userRepository;
+
+    @Autowired
+    BCryptPasswordEncoder encoder;
+
 
 
     @PostMapping(path = "/login")
@@ -39,7 +45,7 @@ public class BasicAuthController {
         User u=userMapper.fromUserDTO(userDTO);
 
 
-       jwtUserDetailsService.saveUser(u);
+       userRepository.save(u);
        return ResponseEntity.ok("{\"resp\":\"Usuario creado\"}");
     }
 

@@ -5,13 +5,18 @@ import com.pablomonteserin.conJwt.helpers.PasswordEncoderMapperHelper;
 import com.pablomonteserin.conJwt.model.User;
 import org.mapstruct.Mapper;
 import  org.mapstruct.Mapping;
-
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 @Mapper(componentModel = "spring", uses = PasswordEncoderMapperHelper.class)
-public interface UserMapper {
+public abstract class UserMapper {
 
-    @Mapping(target = "password", source = "password", qualifiedByName = "encodePassword") // usará el helper automáticamente
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Mapping(target = "password", expression = "java(passwordEncoder.encode(source.getPassword()))") // usará el helper automáticamente
     @Mapping(target = "birthdate", source = "birthdate")
     @Mapping(target = "residente", source = "residente")
     // Puedes inicializar los booleanos si quieres valores por defecto:
@@ -19,8 +24,8 @@ public interface UserMapper {
     @Mapping(target = "accountNonLocked", constant = "true")
     @Mapping(target = "credentialsNonExpired", constant = "true")
     @Mapping(target = "enabled", constant = "true")
-    User fromUserDTO(UserDTO source);
+    public abstract User fromUserDTO(UserDTO source);
 
     @Mapping(target = "password", ignore = true)
-    UserDTO fromUser(User source);
+   public abstract UserDTO fromUser(User source);
 }
