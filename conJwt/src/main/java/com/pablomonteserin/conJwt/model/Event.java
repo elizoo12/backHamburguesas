@@ -1,13 +1,11 @@
 package com.pablomonteserin.conJwt.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity @Getter @Setter
 public class Event {
@@ -17,5 +15,8 @@ public class Event {
     private String name;
     private Date date;
     private String place;
+
+    @OneToMany(mappedBy = "event")
+    private List<RelationEventUserNeed> relation;
 
 }

@@ -1,12 +1,11 @@
 package com.pablomonteserin.conJwt.model;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity @Getter @Setter
 public class Need {
@@ -14,4 +13,7 @@ public class Need {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Para generar números autoincrementados
     private int id;
     private String Name;
+
+    @OneToMany(mappedBy = "need")
+    private List<RelationEventUserNeed> relation;
 }

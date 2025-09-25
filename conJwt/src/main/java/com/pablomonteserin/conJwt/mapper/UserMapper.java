@@ -19,11 +19,15 @@ public abstract class UserMapper {
     @Mapping(target = "password", expression = "java(passwordEncoder.encode(source.getPassword()))") // usará el helper automáticamente
     @Mapping(target = "birthdate", source = "birthdate")
     @Mapping(target = "residente", source = "residente")
+    @Mapping(target = "description", source = "description")
+    @Mapping(target = "fullName", source = "fullName")
     // Puedes inicializar los booleanos si quieres valores por defecto:
     @Mapping(target = "accountNonExpired", constant = "true")
     @Mapping(target = "accountNonLocked", constant = "true")
     @Mapping(target = "credentialsNonExpired", constant = "true")
     @Mapping(target = "enabled", constant = "true")
+
+
     public abstract User fromUserDTO(UserDTO source);
 
     @Mapping(target = "password", ignore = true)

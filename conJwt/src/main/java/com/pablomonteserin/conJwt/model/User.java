@@ -1,18 +1,12 @@
 package com.pablomonteserin.conJwt.model;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
+import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,8 +20,16 @@ public class User implements UserDetails {
     private int id;
     private String username;
     private String password;
+    private String fullName;
+    private String description;
     private Date birthdate;
     private String residente;
+
+    @OneToMany(mappedBy = "user")
+    private List<RelationEventUserNeed> relation;
+
+
+
     private boolean accountNonExpired;
     private boolean accountNonLocked;
     private boolean credentialsNonExpired;
@@ -69,6 +71,30 @@ public class User implements UserDetails {
         return password;
     }
 
+
+    public List<RelationEventUserNeed> getRelation() {
+        return relation;
+    }
+
+    public void setRelation(List<RelationEventUserNeed> relation) {
+        this.relation = relation;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 
     public void setUsername(String username) {
         this.username= username;

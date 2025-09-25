@@ -32,19 +32,6 @@ public class JwtUserDetailsService implements UserDetailsService {
         }
         return user;
     }
-<<<<<<< HEAD
-=======
 
-
-
-
-
-    public User saveUser(User user) {
-        String encryptedPassword = encoder.encode(user.getPassword());
-        user.setPassword(encryptedPassword);
-        return userRepository.save(user);
-    }
-
->>>>>>> 6ff2d6074ddf0c1e8a347e906aadf01f45bca38b
 }
 
